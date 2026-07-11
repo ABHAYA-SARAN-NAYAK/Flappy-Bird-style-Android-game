@@ -35,6 +35,10 @@ const GameScreen = ({onExit, onNewHighScore}) => {
 
   // Bird animation - rotation based on velocity
   const birdRotation = useRef(new Animated.Value(0)).current;
+  const birdRotationStyle = birdRotation.interpolate({
+    inputRange: [-25, 25],
+    outputRange: ['-25deg', '25deg'],
+  });
 
   // Update bird rotation based on velocity (for visual flair)
   useEffect(() => {
@@ -177,7 +181,7 @@ const GameScreen = ({onExit, onNewHighScore}) => {
                 height: BIRD_SIZE,
                 left: width / 2 - BIRD_SIZE / 2,
                 top: birdY,
-                transform: [{rotate: `${birdRotation}deg`}],
+                transform: [{rotate: birdRotationStyle}],
               },
             ]}>
             <View style={styles.birdBody}>
